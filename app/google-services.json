@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "98041500492",
+    "firebase_url": "https://firemessesnger.firebaseio.com",
+    "project_id": "firemessesnger",
+    "storage_bucket": "firemessesnger.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:98041500492:android:d351e03c5824fea8",
+        "android_client_info": {
+          "package_name": "com.konfire.jogendra.firemessenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "98041500492-rkda40q04fq1981d3d3qvhikgoqq78rg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSEwNWkZ84aicptT4qQHsHUzj9R4y0UFI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
