@@ -2,7 +2,6 @@ package com.konfire.jogendra.firemessenger
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -34,15 +33,16 @@ class RegisterActivity : AppCompatActivity() {
 
     var selectedPhotoUri: Uri? = null
 
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == 0 && requestCode == Activity.RESULT_OK && data != null) {
+        if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
             // Proceed with selected image
             selectedPhotoUri = data.data
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
-            val bitmapDrawable = BitmapDrawable(bitmap)
-            select_photo_button.setBackgroundDrawable(bitmapDrawable)
+            select_photo_imageview.setImageBitmap(bitmap)
+            select_photo_button.alpha = 0f
         }
     }
 
