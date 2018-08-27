@@ -10,6 +10,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -42,7 +43,6 @@ class RegisterActivity : AppCompatActivity() {
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
             val bitmapDrawable = BitmapDrawable(bitmap)
             select_photo_button.setBackgroundDrawable(bitmapDrawable)
-            uploadImageToFirebase()
         }
     }
 
@@ -55,6 +55,23 @@ class RegisterActivity : AppCompatActivity() {
         ref.putFile(selectedPhotoUri!!)
                 .addOnSuccessListener {
                     Log.d("Register", "Image uploaded: ${it.metadata?.path}")
+                    ref.downloadUrl.addOnSuccessListener {
+                        saveUserToFirebaseStorage(it.toString())
+                    }
+                }
+                .addOnFailureListener {
+
+                }
+    }
+
+    private fun saveUserToFirebaseStorage(profileImageUrl: String) {
+        val uid = FirebaseAuth.getInstance().uid ?: ""
+        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+        val user = User(uid, username_edittext_register_textfield.text.toString(), profileImageUrl)
+
+        ref.setValue(user)
+                .addOnSuccessListener {
+                    Log.d("RegisterActivity", "Saved user to database")
                 }
     }
 
@@ -71,7 +88,7 @@ class RegisterActivity : AppCompatActivity() {
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener {
                     if (!it.isSuccessful) return@addOnCompleteListener
-
+                    uploadImageToFirebase()
                 }
                 .addOnFailureListener {
                     Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
@@ -86,3 +103,5 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 }
+
+class User(val uid: String, val username: String, val profileImageUrl: String)
