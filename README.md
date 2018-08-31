@@ -22,3 +22,6 @@ Real time chat app for Android, developed in Kotlin. Used Google Firebase for Au
 </td>
 </tr> 
   </table>
+
+## License
+Fire Messenger is available under the Apache 2.0 license. See the [LICENSE](LICENSE) file for more info.
