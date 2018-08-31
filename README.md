@@ -3,6 +3,8 @@
 # FireMessenger 
 Real time chat app for Android, developed in Kotlin. Used Google Firebase for Auth and Database.
 
+---
+
 ## Author
 
 <table>
